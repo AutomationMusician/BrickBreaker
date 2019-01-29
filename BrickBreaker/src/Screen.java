@@ -1,3 +1,5 @@
+// Screen.java
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -30,9 +32,9 @@ public class Screen extends Canvas {
 	
 	public void setup() {
 
-		Program.paddles.add(new Paddle(A, D, -0.5));
-		Program.paddles.add(new Paddle(LEFT, RIGHT, 0.5));
-		Program.balls.add(new Ball(getWidth()/2.0, getHeight() - 50, 0, -2, Color.BLACK));
+		Program.paddles.add(new Paddle(-0.5));
+		Program.paddles.add(new Paddle(0.5));
+		createBalls();
 		
 		
 		for (double x=30; x<getWidth() - 50; x += 60) {
@@ -125,11 +127,8 @@ public class Screen extends Canvas {
 	}
 	
 	private void createBalls() {
-		for (Paddle paddle : Program.paddles) {
-			Vector position = new Vector(paddle.position.x, paddle.position.y - Paddle.radius);
-			double angle = (Math.random()/2.0 - 3.0/4.0)*Math.PI; // range of [-3*pi/4, -pi/4]
-			Ball ball = new Ball(position, angle, Color.BLACK);
-		}
+		for (Paddle paddle : Program.paddles) 
+			Program.balls.add(new Ball(paddle.position));
 	}
 	
 	public Graphics2D getGraphics() {
