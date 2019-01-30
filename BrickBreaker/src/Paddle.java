@@ -16,7 +16,6 @@ public class Paddle {
 		position = new Vector();
 		position.x = Program.getCanvas().getWidth()*(1+positionCoefficient)*0.5;
 		position.y = Program.getCanvas().getHeight() + radius - height;
-		System.out.println(radius);
 	}
 	
 	public void updatePosition() {

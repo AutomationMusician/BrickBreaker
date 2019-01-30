@@ -34,15 +34,8 @@ public class Screen extends Canvas {
 
 		Program.paddles.add(new Paddle(-0.5));
 		Program.paddles.add(new Paddle(0.5));
+		createBricks();
 		createBalls();
-		
-		
-		for (double x=30; x<getWidth() - 50; x += 60) {
-			for (double y=30; y<getHeight() - 100; y += 30) {
-				if (Math.random() < 0.1)
-					Program.bricks.add(new Brick(new Vector(x, y), Color.BLACK));
-			}
-		}
 		
 		createBufferStrategy(3);
 	    bufferStrategy = getBufferStrategy();
@@ -129,6 +122,32 @@ public class Screen extends Canvas {
 	private void createBalls() {
 		for (Paddle paddle : Program.paddles) 
 			Program.balls.add(new Ball(paddle.position));
+	}
+	
+	private void createBricks() {
+		double margin = 10;
+		double effectiveWidth = Brick.width + margin;
+		double sideMargin = (getWidth() % effectiveWidth)/2.0;
+		double xOffset = sideMargin + effectiveWidth/2.0;
+		double effectiveHeight = Brick.height + margin;
+		double yOffset = Brick.height/2.0 + margin;
+		
+		
+		for (double x=xOffset; x<getWidth(); x += effectiveWidth) {
+			for (double y=yOffset; y<getHeight()*3.0/4.0; y += effectiveHeight) {
+				//if (Math.random() < 0.1)
+					Program.bricks.add(new Brick(new Vector(x, y)));
+			}
+		}
+		
+		/*
+		int numWide = (int) effectiveWidth / getWidth();
+		double x = sideMargin;
+		for (int i=0; i<numWide; i++) {
+			Program.bricks.add(new Brick(new Vector(x, 100)));
+			x += effectiveWidth;
+		}
+		*/
 	}
 	
 	public Graphics2D getGraphics() {

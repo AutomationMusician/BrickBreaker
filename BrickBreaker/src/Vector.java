@@ -34,8 +34,22 @@ public class Vector {
 		return Math.atan2(y, x);
 	}
 	
+	public double squareMag() {
+		return (x*x + y*y);
+	}
+	
+	public double mag() {
+		return Math.sqrt(squareMag());
+	}
+	
 	public static Vector sub(Vector a, Vector b) {
 		return new Vector(a.x - b.x, a.y - b.y);
+	}
+	
+	public static Vector rotate(Vector v, double angle) {
+		double mag = v.mag();
+		double rotatedAngle = v.heading() + angle;
+		return new Vector(mag*Math.cos(rotatedAngle), mag*Math.sin(rotatedAngle));
 	}
 	
 }
