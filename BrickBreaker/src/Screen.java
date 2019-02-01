@@ -32,8 +32,8 @@ public class Screen extends Canvas {
 	
 	public void setup() {
 
-		Program.paddles.add(new Paddle(-0.5));
-		Program.paddles.add(new Paddle(0.5));
+		Program.paddles.add(new Paddle(-0.5, A, D));
+		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT));
 		createBricks();
 		createBalls();
 		
@@ -132,22 +132,12 @@ public class Screen extends Canvas {
 		double effectiveHeight = Brick.height + margin;
 		double yOffset = Brick.height/2.0 + margin;
 		
-		
 		for (double x=xOffset; x<getWidth(); x += effectiveWidth) {
 			for (double y=yOffset; y<getHeight()*3.0/4.0; y += effectiveHeight) {
-				//if (Math.random() < 0.1)
+				if (Math.random() < 0.1)
 					Program.bricks.add(new Brick(new Vector(x, y)));
 			}
 		}
-		
-		/*
-		int numWide = (int) effectiveWidth / getWidth();
-		double x = sideMargin;
-		for (int i=0; i<numWide; i++) {
-			Program.bricks.add(new Brick(new Vector(x, 100)));
-			x += effectiveWidth;
-		}
-		*/
 	}
 	
 	public Graphics2D getGraphics() {

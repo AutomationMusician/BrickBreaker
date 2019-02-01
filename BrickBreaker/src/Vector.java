@@ -1,3 +1,4 @@
+// Vector.java
 
 public class Vector {
 	public double x, y;
@@ -30,6 +31,13 @@ public class Vector {
 		return this;
 	}
 	
+	public Vector resize(double magnitude) {
+		double factor = magnitude/mag();
+		x *= factor;
+		y *= factor;
+		return this;
+	}
+	
 	public double heading() {
 		return Math.atan2(y, x);
 	}
@@ -42,14 +50,24 @@ public class Vector {
 		return Math.sqrt(squareMag());
 	}
 	
-	public static Vector sub(Vector a, Vector b) {
-		return new Vector(a.x - b.x, a.y - b.y);
+	public Vector rotate(double angle) {
+		double mag = mag();
+		double rotatedAngle = heading() - angle;
+		x = mag*Math.cos(rotatedAngle);
+		y = mag*Math.sin(rotatedAngle);
+		return this;
 	}
 	
-	public static Vector rotate(Vector v, double angle) {
-		double mag = v.mag();
-		double rotatedAngle = v.heading() + angle;
-		return new Vector(mag*Math.cos(rotatedAngle), mag*Math.sin(rotatedAngle));
+	public String toString() {
+		return "(" + x + "," + y + ")";
+	}
+	
+	public static Vector add(Vector a, Vector b) {
+		return new Vector(a.x + b.x, a.y + b.y);
+	}
+	
+	public static Vector sub(Vector a, Vector b) {
+		return new Vector(a.x - b.x, a.y - b.y);
 	}
 	
 }

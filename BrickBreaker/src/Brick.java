@@ -16,17 +16,13 @@ public class Brick {
 	
 	public Brick(Vector position) {
 		this.position = position;
-	}
-	
-	private void updateRect2d() {
-		rect2d.x = position.x - width/2;
-		rect2d.y = position.y - height/2;
 		rect2d.width = width;
 		rect2d.height = height;
 	}
 	
 	public void display(Graphics2D graphics) {
-		updateRect2d();
+		rect2d.x = position.x - width/2;
+		rect2d.y = position.y - height/2;
 		graphics.setColor(color);
 		graphics.fill(rect2d);
 	}
