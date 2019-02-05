@@ -24,6 +24,7 @@ public class Screen extends Canvas {
 	
 	private BufferStrategy bufferStrategy;
 	private Graphics2D graphics;
+	private FontMetrics sanSerifFontMetrics;
 	
 	public Screen(int width, int height) {
 		super();
@@ -40,6 +41,9 @@ public class Screen extends Canvas {
 		createBufferStrategy(3);
 	    bufferStrategy = getBufferStrategy();
 	    graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
+
+		graphics.setFont(sanSerifFont);
+	    sanSerifFontMetrics = graphics.getFontMetrics();
 	}
 	
 	public void draw() {
@@ -94,19 +98,37 @@ public class Screen extends Canvas {
 		if (Program.balls.isEmpty()) 
 			noBallsLeft();
 		
+		if (Program.bricks.isEmpty()) 
+			restart();
+			
+		
+	}
+	
+	private void restart() {
+		
+		graphics.setColor(Color.RED);
+		String str = "YOU WIN!";
+		int w = sanSerifFontMetrics.stringWidth(str);
+	    int h = sanSerifFontMetrics.getAscent();
+	    graphics.drawString(str, (getWidth() - w) / 2, (getHeight() - h) / 2);
+        
+	    bufferStrategy.show();
+		
+		Program.balls.clear();
+		createBricks();
+		noBallsLeft();
+		
 	}
 	
 	private void noBallsLeft() {
-		graphics.setFont(sanSerifFont);
-	    FontMetrics fm = graphics.getFontMetrics();
 		try {
 			for (int i=5; i>=0; i--) {
 				display();
 				
 				graphics.setColor(Color.RED);
 				String str = "Restarting in " + i;
-			    int w = fm.stringWidth(str);
-			    int h = fm.getAscent();
+			    int w = sanSerifFontMetrics.stringWidth(str);
+			    int h = sanSerifFontMetrics.getAscent();
 			    graphics.drawString(str, (getWidth() - w) / 2, (getHeight() - h) / 2);
 		        
 			    bufferStrategy.show();

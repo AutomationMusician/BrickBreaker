@@ -17,7 +17,7 @@ public class Window extends JFrame {
 	
 	public Window() throws InterruptedException {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//setSize(400, 400); 
+		//setSize(600, 400); 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		Thread.sleep(1000);
