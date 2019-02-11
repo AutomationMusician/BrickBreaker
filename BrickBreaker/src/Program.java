@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class Program {
 	private static Window window;
-	private static Screen canvas;
+	private static Display canvas;
 	public static ArrayList<Ball> balls = new ArrayList<Ball>();
 	public static ArrayList<Paddle> paddles = new ArrayList<Paddle>();
 	public static ArrayList<Brick> bricks = new ArrayList<Brick>();
@@ -23,7 +23,7 @@ public class Program {
 		return window;
 	}
 	
-	public static Screen getCanvas() {
+	public static Display getCanvas() {
 		return canvas;
 	}
 	

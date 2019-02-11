@@ -1,4 +1,4 @@
-// Screen.java
+// Display.java
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -7,7 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-public class Screen extends Canvas {
+public class Display extends Canvas {
 	private static final long serialVersionUID = 5241834608422998589L;
 	private static Font sanSerifFont = new Font("SanSerif", Font.BOLD, 72);
 	
@@ -26,13 +26,12 @@ public class Screen extends Canvas {
 	private Graphics2D graphics;
 	private FontMetrics sanSerifFontMetrics;
 	
-	public Screen(int width, int height) {
+	public Display(int width, int height) {
 		super();
 		setSize(width, height);
 	}
 	
 	public void setup() {
-
 		Program.paddles.add(new Paddle(-0.5, A, D));
 		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT));
 		createBricks();
@@ -100,8 +99,6 @@ public class Screen extends Canvas {
 		
 		if (Program.bricks.isEmpty()) 
 			restart();
-			
-		
 	}
 	
 	private void restart() {

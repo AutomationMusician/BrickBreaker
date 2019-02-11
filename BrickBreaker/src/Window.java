@@ -12,7 +12,7 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = 5259700796854880162L;
 	
 	private HashSet<Integer> pressedButtons = new HashSet<Integer>();
-	private static Screen canvas;
+	private static Display canvas;
 	private boolean running;
 	
 	public Window() throws InterruptedException {
@@ -23,7 +23,7 @@ public class Window extends JFrame {
 		Thread.sleep(1000);
 		
 		Container container = getContentPane();
-		canvas = new Screen(container.getWidth(), container.getHeight());
+		canvas = new Display(container.getWidth(), container.getHeight());
 		add(canvas);
 		addKeyListener(new FrameKeyListener());
 		addWindowListener(new FrameWindowListener());
@@ -60,7 +60,7 @@ public class Window extends JFrame {
 		public void windowDeactivated(WindowEvent e) {}
 	}
 
-	public Screen getCanvas() {
+	public Display getCanvas() {
 		return canvas;
 	}
 	
