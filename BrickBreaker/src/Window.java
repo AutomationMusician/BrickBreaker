@@ -27,6 +27,7 @@ public class Window extends JFrame {
 		add(canvas);
 		addKeyListener(new FrameKeyListener());
 		addWindowListener(new FrameWindowListener());
+		//addMouseListener(new FrameMouseListener());
 	}
 	
 	public void run() {

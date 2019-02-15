@@ -122,6 +122,25 @@ public class Ball {
 		}
 	}
 	
+	public void checkBall(Ball that) {
+		Vector relativePosition = Vector.sub(that.position, this.position);
+		if (relativePosition.squareMag() < 4*Ball.radius*Ball.radius) {
+			double relativeAngle = relativePosition.heading();
+			double rotationAngle = relativeAngle + Math.PI/2;
+			
+			this.velocity.rotate(rotationAngle);
+			this.velocity.y = -this.velocity.y;
+			this.velocity.rotate(-rotationAngle);
+			
+			that.velocity.rotate(rotationAngle);
+			that.velocity.y = -that.velocity.y;
+			that.velocity.rotate(-rotationAngle);
+			
+			relativePosition.resize(2*Ball.radius);
+			that.position = Vector.add(this.position, relativePosition);
+		}
+	}
+	
 	public void display(Graphics2D graphics) {
 		circle.x = position.x - radius;
 		circle.y = position.y - radius;

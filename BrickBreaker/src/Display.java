@@ -11,14 +11,14 @@ public class Display extends Canvas {
 	private static final long serialVersionUID = 5241834608422998589L;
 	private static Font sanSerifFont = new Font("SanSerif", Font.BOLD, 72);
 	
-	public final int LEFT = 37;
-	public final int UP = 38;
-	public final int RIGHT = 39;
-	public final int DOWN = 40;
-	public final int A = 65;
-	public final int S = 83;
-	public final int W = 87;
-	public final int D = 68;
+	public static final int LEFT = 37;
+	public static final int UP = 38;
+	public static final int RIGHT = 39;
+	public static final int DOWN = 40;
+	public static final int A = 65;
+	public static final int S = 83;
+	public static final int W = 87;
+	public static final int D = 68;
 	
 	public final int updatesPerFrame = 2;
 	
@@ -29,6 +29,7 @@ public class Display extends Canvas {
 	public Display(int width, int height) {
 		super();
 		setSize(width, height);
+		//addMouseListener(new CanvasMouseListener());
 	}
 	
 	public void setup() {
@@ -69,6 +70,14 @@ public class Display extends Canvas {
         
         for (Ball ball : Program.balls) 
         	ball.updatePosition();
+        
+        for (int i=0; i<Program.balls.size() - 1; i++) {
+        	Ball ball1 = Program.balls.get(i);
+        	for (int j=i+1; j<Program.balls.size(); j++) {
+        		Ball ball2 = Program.balls.get(j);
+        		ball1.checkBall(ball2);
+        	}
+        }
 	}
 	
 	private void displayObjects() {
@@ -138,7 +147,7 @@ public class Display extends Canvas {
 		createBalls();
 	}
 	
-	private void createBalls() {
+	public void createBalls() {
 		for (Paddle paddle : Program.paddles) 
 			Program.balls.add(new Ball(paddle.position));
 	}
@@ -158,6 +167,19 @@ public class Display extends Canvas {
 			}
 		}
 	}
+	
+	/*
+	private class CanvasMouseListener implements MouseListener {
+		public void mouseClicked(MouseEvent e) {
+			System.out.println("Balls created");
+			createBalls();
+		}
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {}
+	}
+	*/
 	
 	public Graphics2D getGraphics() {
 		return graphics;
