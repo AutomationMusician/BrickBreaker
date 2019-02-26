@@ -33,17 +33,17 @@ public class Display extends Canvas {
 	}
 	
 	public void setup() {
-		Program.paddles.add(new Paddle(-0.5, A, D));
-		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT));
-		createBricks();
-		createBalls();
-		
 		createBufferStrategy(3);
 	    bufferStrategy = getBufferStrategy();
 	    graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
 
 		graphics.setFont(sanSerifFont);
 	    sanSerifFontMetrics = graphics.getFontMetrics();
+	    
+		Program.paddles.add(new Paddle(-0.5, A, D));
+		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT));
+		createBricks();
+		createBalls();
 	}
 	
 	public void draw() {
