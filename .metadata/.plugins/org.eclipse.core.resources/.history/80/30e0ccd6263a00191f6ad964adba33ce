@@ -1,0 +1,48 @@
+// Program.java
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
+import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
+import com.pi4j.io.gpio.event.GpioPinListenerDigital;
+
+public class Program {
+	private static Window window;
+	private static Display canvas;
+	public static ArrayList<Ball> balls = new ArrayList<Ball>();
+	public static ArrayList<Paddle> paddles = new ArrayList<Paddle>();
+	public static ArrayList<Brick> bricks = new ArrayList<Brick>();
+	public static Queue<Ball> ballsToRemove = new ArrayDeque<Ball>();
+	public static Queue<Brick> bricksToRemove = new ArrayDeque<Brick>();
+	
+	public static final GpioController gpio = GpioFactory.getInstance();
+	private static GpioPinDigitalInput button;
+	
+	public static void main(String[] args) throws InterruptedException {
+		initializeButtons();
+		window = new Window();
+		canvas = window.getCanvas();
+		window.run();
+	}
+	
+	private void initializeButtons() {
+		// provision gpio pin #02 as an input pin with its internal pull down resistor enabled
+        button = gpio.provisionDigitalInputPin(RaspiPin.GPIO_04, PinPullResistance.PULL_DOWN);
+
+        // set shutdown state for this input pin
+        button.setShutdownOptions(true);
+	}
+	
+	public static Window getWindow() {
+		return window;
+	}
+	
+	public static Display getCanvas() {
+		return canvas;
+	}
+	
+	public static boolean isPressed(int keyCode) {
+		return window.isPressed(keyCode);
+	}
+}

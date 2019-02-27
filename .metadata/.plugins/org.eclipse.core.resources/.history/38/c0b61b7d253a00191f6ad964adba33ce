@@ -1,0 +1,31 @@
+import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
+import com.pi4j.io.gpio.event.GpioPinListenerDigital;
+
+public class Button {
+	public static final GpioController gpio = GpioFactory.getInstance();
+	public final int index;
+	public final GpioPinDigitalInput input;
+	
+	public Button(int index) throws Exception {
+		this.index = index;
+		this.input = getInput();
+	}
+	
+	private GpioPinDigitalInput getInput() throws Exception {
+		switch (index) {
+			case 0: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_00, PinPullResistance.PULL_DOWN);
+			case 1: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_01, PinPullResistance.PULL_DOWN);
+			case 2: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_DOWN);
+			case 3: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, PinPullResistance.PULL_DOWN);
+			case 4: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_04, PinPullResistance.PULL_DOWN);
+			case 5: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_05, PinPullResistance.PULL_DOWN);
+			case 6: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_DOWN);
+			case 7: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
+			case 8: return gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_DOWN);
+			default:
+				throw new Exception("unsupported gpio pin");
+		}
+	}
+	
+}

@@ -40,8 +40,8 @@ public class Display extends Canvas {
 		graphics.setFont(sanSerifFont);
 	    sanSerifFontMetrics = graphics.getFontMetrics();
 	    
-		Program.paddles.add(new Paddle(-0.5, A, D));
-		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT));
+		Program.paddles.add(new Paddle(-0.5, A, D, 0, 4));
+		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, 0, 0));
 		createBricks();
 		createBalls();
 	}

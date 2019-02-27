@@ -14,6 +14,7 @@ public class Program {
 	public static Queue<Brick> bricksToRemove = new ArrayDeque<Brick>();
 	
 	public static void main(String[] args) throws InterruptedException {
+		InputController.initialize();
 		window = new Window();
 		canvas = window.getCanvas();
 		window.run();
