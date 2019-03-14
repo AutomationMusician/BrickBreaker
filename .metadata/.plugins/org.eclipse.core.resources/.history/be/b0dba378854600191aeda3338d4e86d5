@@ -20,7 +20,7 @@ public class Display extends Canvas {
 	public static final int W = 87;
 	public static final int D = 68;
 	
-	public final int updatesPerFrame = 1;
+	public final int updatesPerFrame = 2;
 	
 	private BufferStrategy bufferStrategy;
 	private Graphics2D graphics;
@@ -40,8 +40,8 @@ public class Display extends Canvas {
 		graphics.setFont(sanSerifFont);
 	    sanSerifFontMetrics = graphics.getFontMetrics();
 	    
-		Program.paddles.add(new Paddle(-0.5, A, D, 5, 7));
-		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, 0, 2));
+		Program.paddles.add(new Paddle(-0.5, A, D, 0, 2));
+		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, 5, 7));
 		createBricks();
 		createBalls();
 	}

@@ -4,9 +4,7 @@ import com.pi4j.io.gpio.*;
 
 public class InputController {
 	private static GpioController gpio;
-	private static GpioPinDigitalInput[] inputs;
 	private static boolean rasPi = true;
-	
 	private static Pin[] pins = {
 		RaspiPin.GPIO_00,
 		RaspiPin.GPIO_01,
@@ -19,6 +17,7 @@ public class InputController {
 		RaspiPin.GPIO_08,
 	};
 	
+	private static GpioPinDigitalInput[] inputs;
 	
 	public static void initialize() {
 		try {
@@ -29,14 +28,12 @@ public class InputController {
 				inputs[i].setShutdownOptions(true);
 			}
 		} catch (java.lang.UnsatisfiedLinkError e) {
-			rasPi = false;
+			raspi = false;
 		}
+		
 	}
 	
 	public static boolean isHigh(int index) {
-		if (rasPi)
-			return inputs[index].isHigh();
-		else
-			return false;
+		return inputs[index].isHigh();
 	}
 }
