@@ -28,6 +28,7 @@ public class Brick {
 			graphics.fill(rect2d);
 		} catch (java.lang.ClassCastException e) {
 			e.printStackTrace();
+			
 		}
 	}
 	

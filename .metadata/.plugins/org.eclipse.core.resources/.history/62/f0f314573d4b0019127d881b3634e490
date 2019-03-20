@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 public class Ball {
-	private static final double speed = 5;
+	private static final double speed = 2;
 	private static final double radius = 10;
 	private static final double paddleSqDist = (radius + Paddle.radius)*(radius + Paddle.radius);
 	private final double lowerBound, rightBound;
