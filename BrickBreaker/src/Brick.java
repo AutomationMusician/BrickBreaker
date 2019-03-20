@@ -1,23 +1,49 @@
 // Brick.java
 
 import java.awt.Color;
+//import java.awt.Font;
+//import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 public class Brick {
 	public enum ContactType { TOP, BOTTOM, LEFT, RIGHT };
+	//private static Font contactFont = new Font("SanSerif", Font.PLAIN, 24);
 	public static final double width = 100;
 	public static final double height = 50;
+	public static final int maxContacts = 3;
+	private static double[] probabilities = new double[maxContacts];
+	
+	static {
+		double sum = 0;
+		for (int i=0; i<maxContacts; i++) {
+			probabilities[i] = Math.pow(i + 1.0, -2);
+			sum += probabilities[i];
+		}
+		for (int i=0; i<maxContacts; i++) 
+			probabilities[i] /= sum;
+	}
 	
 	public Vector position;
-	public Color color = Color.BLACK;
-	private int contacts = 1;
+	public float hue;
+	public Color color;
+	//private Color textColor;
+	private int contacts;
 	private Rectangle2D.Double rect2d = new Rectangle2D.Double();
 	
-	public Brick(Vector position) {
+	
+	public Brick(Vector position, float hue) {
 		this.position = position;
+		this.hue = hue;
 		rect2d.width = width;
 		rect2d.height = height;
+		
+		double randomNum = Math.random();
+		
+		for (contacts = 0; randomNum > probabilities[contacts]; contacts++)
+			randomNum -= probabilities[contacts];
+		contacts++;
+		updateColor();
 	}
 	
 	public void display(Graphics2D graphics) {
@@ -29,6 +55,18 @@ public class Brick {
 		} catch (java.lang.ClassCastException e) {
 			e.printStackTrace();
 		}
+		
+		/*
+		graphics.setColor(textColor);
+		graphics.setFont(contactFont);
+		FontMetrics fm = graphics.getFontMetrics();
+		String str = Integer.toString(contacts);
+		int w = fm.stringWidth(str);
+	    int h = fm.getAscent();
+	    int xPos = (int)(position.x - w/2);
+	    int yPos = (int)(position.y + h/2);
+	    graphics.drawString(str, xPos, yPos);
+	    */
 	}
 	
 	public ContactType contactType(Vector position) {
@@ -67,8 +105,23 @@ public class Brick {
 		}
 	}
 	
+	private void updateColor() {
+		float colorBrightness = 1f - (float)(contacts - 1)/maxContacts;
+		color = Color.getHSBColor(hue, 1f, colorBrightness);
+		
+		/*
+		int textBrightness;
+		if (colorBrightness > 0.75f)
+			textBrightness = 0;
+		else
+			textBrightness = 255;
+		textColor = new Color(textBrightness, textBrightness, textBrightness);
+		*/
+	}
+	
 	public void contact() {
 		--contacts;
+		updateColor();
 		if (contacts <= 0) 
 			Program.bricksToRemove.add(this);
 	}

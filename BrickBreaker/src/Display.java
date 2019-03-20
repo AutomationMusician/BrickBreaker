@@ -24,7 +24,6 @@ public class Display extends Canvas {
 	
 	private BufferStrategy bufferStrategy;
 	private Graphics2D graphics;
-	private FontMetrics sanSerifFontMetrics;
 	
 	public Display(int width, int height) {
 		super();
@@ -36,9 +35,6 @@ public class Display extends Canvas {
 		createBufferStrategy(3);
 	    bufferStrategy = getBufferStrategy();
 	    graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
-
-		graphics.setFont(sanSerifFont);
-	    sanSerifFontMetrics = graphics.getFontMetrics();
 	    
 		Program.paddles.add(new Paddle(-0.5, A, D, 5, 7));
 		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, 0, 2));
@@ -111,11 +107,12 @@ public class Display extends Canvas {
 	}
 	
 	private void restart() {
-		
-		graphics.setColor(Color.RED);
+		graphics.setColor(Color.BLACK);
+		graphics.setFont(sanSerifFont);
+		FontMetrics fm = graphics.getFontMetrics();
 		String str = "YOU WIN!";
-		int w = sanSerifFontMetrics.stringWidth(str);
-	    int h = sanSerifFontMetrics.getAscent();
+		int w = fm.stringWidth(str);
+	    int h = fm.getAscent();
 	    graphics.drawString(str, (getWidth() - w) / 2, (getHeight() - h) / 2);
         
 	    bufferStrategy.show();
@@ -130,11 +127,12 @@ public class Display extends Canvas {
 		try {
 			for (int i=5; i>=0; i--) {
 				display();
-				
-				graphics.setColor(Color.RED);
 				String str = "Restarting in " + i;
-			    int w = sanSerifFontMetrics.stringWidth(str);
-			    int h = sanSerifFontMetrics.getAscent();
+				graphics.setColor(Color.BLACK);
+				graphics.setFont(sanSerifFont);
+				FontMetrics fm = graphics.getFontMetrics();
+			    int w = fm.stringWidth(str);
+			    int h = fm.getAscent();
 			    graphics.drawString(str, (getWidth() - w) / 2, (getHeight() - h) / 2);
 		        
 			    bufferStrategy.show();
@@ -159,11 +157,14 @@ public class Display extends Canvas {
 		double xOffset = sideMargin + effectiveWidth/2.0;
 		double effectiveHeight = Brick.height + margin;
 		double yOffset = Brick.height/2.0 + margin;
-		
-		for (double x=xOffset; x<getWidth(); x += effectiveWidth) {
-			for (double y=yOffset; y<getHeight()*3.0/4.0; y += effectiveHeight) {
-				if (Math.random() < 0.1)
-					Program.bricks.add(new Brick(new Vector(x, y)));
+		int numRows = (int)((0.75*getHeight() - yOffset)/effectiveHeight);
+
+		for (int row=0; row<numRows; row++) {
+			double y = yOffset + row*effectiveHeight;
+			float hue = (float)row/(numRows - 1);
+			for (double x=xOffset; x<getWidth(); x += effectiveWidth) {
+				if (Math.random() < 0.2)
+					Program.bricks.add(new Brick(new Vector(x, y), hue));
 			}
 		}
 	}
