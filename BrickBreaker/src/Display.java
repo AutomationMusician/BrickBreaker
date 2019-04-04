@@ -36,8 +36,8 @@ public class Display extends Canvas {
 	    bufferStrategy = getBufferStrategy();
 	    graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
 	    
-		Program.paddles.add(new Paddle(-0.5, A, D, 5, 7));
-		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, 0, 2));
+		Program.paddles.add(new Paddle(-0.5, A, D, InputController.LEFT));
+		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, InputController.RIGHT));
 		createBricks();
 		createBalls();
 	}

@@ -37,3 +37,12 @@ Command-line arguments:  -os linux -ws gtk
 
 !ENTRY org.eclipse.core.resources 2 10035 2019-04-03 16:58:13.068
 !MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2019-04-04 15:44:05.732 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=arm, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-04-04 15:44:15.399
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

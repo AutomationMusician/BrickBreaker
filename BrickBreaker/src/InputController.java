@@ -8,8 +8,8 @@ public class InputController {
 	private static boolean rasPi = true;
 	
 	public static final int SELECT = 0;
-	public static Joystick left = new Joystick(1, 2, 3, 4);
-	public static Joystick right = new Joystick(5, 6, 7, 8);
+	public static Joystick LEFT = new Joystick(7, 6, 2, 3);
+	public static Joystick RIGHT = new Joystick(5, 8, 4, 1);
 	
 	private static Pin[] pins = {
 		RaspiPin.GPIO_00,
@@ -17,12 +17,10 @@ public class InputController {
 		RaspiPin.GPIO_02,
 		RaspiPin.GPIO_03,
 		RaspiPin.GPIO_04,
-		//RaspiPin.GPIO_05,
+		RaspiPin.GPIO_05,
 		RaspiPin.GPIO_06,
 		RaspiPin.GPIO_07,
-		//RaspiPin.GPIO_08,
-		RaspiPin.GPIO_10,
-		RaspiPin.GPIO_11,
+		RaspiPin.GPIO_16,
 	};
 	
 	
