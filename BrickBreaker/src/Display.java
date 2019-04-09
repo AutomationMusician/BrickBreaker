@@ -11,15 +11,6 @@ public class Display extends Canvas {
 	private static final long serialVersionUID = 5241834608422998589L;
 	private static Font sanSerifFont = new Font("SanSerif", Font.BOLD, 72);
 	
-	public static final int LEFT = 37;
-	public static final int UP = 38;
-	public static final int RIGHT = 39;
-	public static final int DOWN = 40;
-	public static final int A = 65;
-	public static final int S = 83;
-	public static final int W = 87;
-	public static final int D = 68;
-	
 	public final int updatesPerFrame = 1;
 	
 	private BufferStrategy bufferStrategy;
@@ -36,8 +27,8 @@ public class Display extends Canvas {
 	    bufferStrategy = getBufferStrategy();
 	    graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
 	    
-		Program.paddles.add(new Paddle(-0.5, A, D, InputController.LEFT));
-		Program.paddles.add(new Paddle(0.5, LEFT, RIGHT, InputController.RIGHT));
+		Program.paddles.add(new Paddle(-0.5, InputController.getLeft()));
+		Program.paddles.add(new Paddle(0.5, InputController.getRight()));
 		createBricks();
 		createBalls();
 	}

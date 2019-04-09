@@ -27,8 +27,4 @@ public class Program {
 	public static Display getCanvas() {
 		return canvas;
 	}
-	
-	public static boolean isPressed(int keyCode) {
-		return window.isPressed(keyCode);
-	}
 }

@@ -5,13 +5,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.HashSet;
 import javax.swing.JFrame;
 
 public class Window extends JFrame {
 	private static final long serialVersionUID = 5259700796854880162L;
-	
-	private HashSet<Integer> pressedButtons = new HashSet<Integer>();
 	private static Display canvas;
 	private boolean running;
 	
@@ -41,11 +38,11 @@ public class Window extends JFrame {
 		public void keyTyped(KeyEvent e) {}
 		
 		public void keyPressed(KeyEvent e) {
-			pressedButtons.add(e.getKeyCode());
+			InputController.addButton(e.getKeyCode());
 		}
 		
 		public void keyReleased(KeyEvent e) {
-			pressedButtons.remove(e.getKeyCode());
+			InputController.removeButton(e.getKeyCode());
 		}
 	}
 	
@@ -64,9 +61,5 @@ public class Window extends JFrame {
 
 	public Display getCanvas() {
 		return canvas;
-	}
-	
-	public boolean isPressed(int keyCode) {
-		return pressedButtons.contains(keyCode);
 	}
 }
