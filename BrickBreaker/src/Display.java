@@ -77,6 +77,8 @@ public class Display extends Canvas {
         
         for (Ball ball : Program.balls) 
         	ball.display(graphics);
+        
+        Program.livesCounter.display(graphics);
 	}
 	
 	private void removeObjects() {
@@ -115,6 +117,7 @@ public class Display extends Canvas {
 	}
 	
 	private void noBallsLeft() {
+		Program.livesCounter.decrement();
 		try {
 			for (int i=5; i>=0; i--) {
 				display();

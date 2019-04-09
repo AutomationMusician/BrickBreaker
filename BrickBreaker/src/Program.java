@@ -12,11 +12,13 @@ public class Program {
 	public static ArrayList<Brick> bricks = new ArrayList<Brick>();
 	public static Queue<Ball> ballsToRemove = new ArrayDeque<Ball>();
 	public static Queue<Brick> bricksToRemove = new ArrayDeque<Brick>();
+	public static LivesCounter livesCounter;
 	
 	public static void main(String[] args) throws InterruptedException {
 		InputController.initialize();
 		window = new Window();
 		canvas = window.getCanvas();
+		livesCounter = new LivesCounter();
 		window.run();
 	}
 	
