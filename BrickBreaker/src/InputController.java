@@ -58,7 +58,6 @@ public class InputController {
 			left = new Joystick(W, S, A, D);
 			right = new Joystick(UP, DOWN, LEFT, RIGHT);
 		}
-			
 	}
 	
 	public static boolean isRaspi() {

@@ -92,32 +92,45 @@ public class Display extends Canvas {
 			Program.bricks.remove(brick);
 		}
 		
-		if (Program.balls.isEmpty()) 
-			noBallsLeft();
+		if (Program.balls.isEmpty()) {
+			Program.livesCounter.decrement();
+			if (Program.livesCounter.getLives() > 0)
+				noBallsLeft();
+			else 
+				restart(false);
+		}
 		
 		if (Program.bricks.isEmpty()) 
-			restart();
+			restart(true);
 	}
 	
-	private void restart() {
+	private void restart(boolean win) {
+		String str = win ? "YOU WIN!" : "GAME OVER";
 		graphics.setColor(Color.BLACK);
 		graphics.setFont(sanSerifFont);
 		FontMetrics fm = graphics.getFontMetrics();
-		String str = "YOU WIN!";
 		int w = fm.stringWidth(str);
 	    int h = fm.getAscent();
 	    graphics.drawString(str, (getWidth() - w) / 2, (getHeight() - h) / 2);
         
 	    bufferStrategy.show();
 		
+	    try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	    
+	    Program.livesCounter.reset();
+	    
 		Program.balls.clear();
+		Program.bricks.clear();
 		createBricks();
 		noBallsLeft();
 		
 	}
 	
 	private void noBallsLeft() {
-		Program.livesCounter.decrement();
 		try {
 			for (int i=5; i>=0; i--) {
 				display();

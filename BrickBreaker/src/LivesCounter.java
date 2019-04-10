@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 
 public class LivesCounter {
 	private static int MAX_LIVES = 3;
-	private static double radius = 30;
+	private static double radius = 40;
 	private static double bufferSpace = 5;
 	private static int fontSize = 32;
 	private static Font font = new Font("SanSerif", Font.PLAIN, fontSize);
@@ -15,18 +15,22 @@ public class LivesCounter {
 	private static Color containerColor = new Color(0, 0, 0, 100);
 	
 	private Ellipse2D.Double[] balls = new Ellipse2D.Double[MAX_LIVES];
-	private String[] displayStrings = new String[MAX_LIVES];
+	private String[] displayStrings = new String[MAX_LIVES+1];
 	private Rectangle2D.Double container;
 	private int lives = MAX_LIVES;
 	
 	public LivesCounter() {
 		double diameter = 2*radius;
-		for (int i=0; i<MAX_LIVES; i++) {
+		for (int i=0; i<balls.length; i++) {
 			balls[i] = new Ellipse2D.Double(Program.getCanvas().getWidth() - diameter*(i+1) - bufferSpace*i, fontSize + bufferSpace, diameter, diameter);
+		}
+		for (int i=0; i<displayStrings.length; i++) {
 			if (i == 0) 
-				displayStrings[i] = "last life";
+				displayStrings[i] = "GAME OVER";
+			else if (i == 1)
+				displayStrings[i] = "Last Life";
 			else
-				displayStrings[i] = (i+1) + " lives left";
+				displayStrings[i] = i + " Lives Left";
 		}
 		double width = diameter*MAX_LIVES + bufferSpace*(MAX_LIVES-1);
 		container = new Rectangle2D.Double(Program.getCanvas().getWidth() - width, 0, width, fontSize + bufferSpace + diameter);
@@ -52,7 +56,7 @@ public class LivesCounter {
 		graphics.setFont(font);
 		FontMetrics fm = graphics.getFontMetrics();
 		
-		String str = displayStrings[lives-1];
+		String str = displayStrings[lives];
 		
 		int strWidth = fm.stringWidth(str);
 		int strHeight = fm.getAscent();
