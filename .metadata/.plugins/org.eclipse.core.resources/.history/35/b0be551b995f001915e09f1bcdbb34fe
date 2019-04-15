@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 public class Ball {
+	private static final double speed = 5;
 	private static final double radius = 10;
 	private static final double paddleSqDist = (radius + Paddle.radius)*(radius + Paddle.radius);
 	private final double lowerBound, rightBound;
@@ -19,7 +20,7 @@ public class Ball {
 		lowerBound = Program.getCanvas().getHeight() - radius*(Paddle.radius - Paddle.height)/Paddle.radius;
 		position = new Vector(paddlePosition.x, paddlePosition.y - Paddle.radius);
 		double angle = (-3.0/4.0 + Math.random()/2.0)*Math.PI; // range of [-3*pi/4, -pi/4)
-		velocity = (new Vector(angle)).mult(Program.speed);
+		velocity = (new Vector(angle)).mult(speed);
 	}
 	
 	public void updatePosition() {

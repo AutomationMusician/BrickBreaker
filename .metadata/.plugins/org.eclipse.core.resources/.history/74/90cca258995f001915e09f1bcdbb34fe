@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class Program {
-	public static final double speed = 4;
+	public static final double speed = 3;
 	private static Window window;
 	private static Display canvas;
 	public static ArrayList<Ball> balls = new ArrayList<Ball>();

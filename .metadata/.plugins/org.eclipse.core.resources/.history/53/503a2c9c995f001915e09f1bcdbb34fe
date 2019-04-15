@@ -8,27 +8,24 @@ public class Paddle {
 	public static final double width = 150;
 	public static final double height = 15;
 	public static final double radius = (width*width + 4*height*height)/(8*height);
-	private static final double speed = 5;
-	private final int leftKey, rightKey, leftButton, rightButton;
+	private static final double speed = Program.speed;
+	private final Joystick joystick;
 	private Color color = Color.BLACK;
 	private Ellipse2D.Double circle = new Ellipse2D.Double();
 	public Vector position;
 	
-	public Paddle(double positionCoefficient, int leftKey, int rightKey, int leftButton, int rightButton) {
+	public Paddle(double positionCoefficient, Joystick joystick) {
 		circle.width = circle.height = 2.0*radius;
 		position = new Vector();
 		position.x = Program.getCanvas().getWidth()*(1+positionCoefficient)*0.5;
 		position.y = Program.getCanvas().getHeight() + radius - height;
-		this.leftKey = leftKey;
-		this.rightKey = rightKey;
-		this.leftButton = leftButton;
-		this.rightButton = rightButton;
+		this.joystick = joystick;
 	}
 	
 	public void updatePosition() {
-		if (Program.isPressed(leftKey) || InputController.isHigh(leftButton))
+		if (InputController.isHigh(joystick.LEFT))
 			position.x -= speed;
-		if (Program.isPressed(rightKey) || InputController.isHigh(rightButton))
+		if (InputController.isHigh(joystick.RIGHT))
 			position.x += speed;
 		
 		double leftBoundry = width/2.0;
