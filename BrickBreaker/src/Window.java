@@ -15,23 +15,47 @@ public class Window extends JFrame {
 	public Window() throws InterruptedException {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Brick Breaker");
+		setSize(1280, 700);
 		//setSize(600, 400); 
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		Thread.sleep(1000);
 		
-		Container container = getContentPane();
-		canvas = new Display(container.getWidth(), container.getHeight());
-		add(canvas);
 		addKeyListener(new FrameKeyListener());
 		addWindowListener(new FrameWindowListener());
 		//addMouseListener(new FrameMouseListener());
 	}
 	
 	public void run() {
-		canvas.setup();
-		running = true;
-	    while (running) canvas.draw();
+		boolean restart = true;
+		while (restart) {
+			//System.out.println("restarting");
+			Container container = getContentPane();
+			canvas = new Display(container.getWidth(), container.getHeight());
+			add(canvas);
+			Program.restart();
+			
+			canvas.setup();
+			running = true;
+			restart = false;
+		    while (running) {
+		    	canvas.draw();
+		    	/*
+		    	if (InputController.isHigh(InputController.getSelect())) {
+		    		restart = true;
+		    		running = false;
+		    		System.out.print("Preparing to restart\t");
+		    	}
+		    	*/
+		    }
+		    
+		    remove(canvas);
+		    try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private class FrameKeyListener implements KeyListener {
