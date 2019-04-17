@@ -41,6 +41,10 @@ public class Paddle {
 		circle.x = position.x - radius;
 		circle.y = position.y - radius;
 		graphics.setColor(color);
-		graphics.fill(circle);
+		try {
+			graphics.fill(circle);
+		} catch (java.lang.ClassCastException e) {
+			e.printStackTrace();
+		}
 	}
 }

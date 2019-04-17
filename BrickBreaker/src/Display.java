@@ -43,9 +43,13 @@ public class Display extends Canvas {
 	}
 	
 	private void display() {
-    	graphics.setColor(Color.WHITE);
-        graphics.clearRect(0, 0, getWidth(), getHeight());
-        graphics.fillRect(0, 0, getWidth(), getHeight());
+		try {
+	    	graphics.setColor(Color.WHITE);
+	        graphics.clearRect(0, 0, getWidth(), getHeight());
+	        graphics.fillRect(0, 0, getWidth(), getHeight());
+		} catch (java.lang.ClassCastException e) {
+			e.printStackTrace();
+		}
         
         displayObjects();
 	}
