@@ -17,16 +17,15 @@ public class Program {
 	public static void main(String[] args) throws InterruptedException {
 		InputController.initialize();
 		window = new Window();
+		canvas = window.getCanvas();
 		window.run();
 	}
 	
 	public static void restart() {
 		balls.clear();
-		paddles.clear();
 		bricks.clear();
 		ballsToRemove.clear();
 		bricksToRemove.clear();
-		canvas = window.getCanvas();
 	}
 	
 	public static Window getWindow() {

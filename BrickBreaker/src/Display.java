@@ -90,22 +90,15 @@ public class Display extends Canvas {
 			Program.bricks.remove(brick);
 		}
 		
+		if (Program.bricks.isEmpty()) 
+			restart();
+		
 		if (Program.balls.isEmpty()) 
 			noBallsLeft();
 		
-		if (Program.bricks.isEmpty()) 
-			restart();
 	}
 	
 	private void restart() {
-		graphics.setColor(Color.BLACK);
-		graphics.setFont(sanSerifFont);
-		FontMetrics fm = graphics.getFontMetrics();
-		String str = "YOU WIN!";
-		int w = fm.stringWidth(str);
-	    int h = fm.getAscent();
-	    graphics.drawString(str, (getWidth() - w) / 2, (getHeight() - h) / 2);
-        
 	    bufferStrategy.show();
 		
 		Program.balls.clear();
@@ -116,7 +109,7 @@ public class Display extends Canvas {
 	
 	private void noBallsLeft() {
 		try {
-			for (int i=5; i>=0; i--) {
+			for (int i=3; i>=0; i--) {
 				display();
 				String str = "Restarting in " + i;
 				graphics.setColor(Color.BLACK);
