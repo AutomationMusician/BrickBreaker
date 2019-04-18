@@ -8,7 +8,6 @@ public class Program {
 	public static final double speed = 4;
 	private static Window window;
 	private static Display canvas;
-	private static boolean restart = true;
 	public static ArrayList<Ball> balls = new ArrayList<Ball>();
 	public static ArrayList<Paddle> paddles = new ArrayList<Paddle>();
 	public static ArrayList<Brick> bricks = new ArrayList<Brick>();
@@ -17,26 +16,17 @@ public class Program {
 	
 	public static void main(String[] args) throws InterruptedException {
 		InputController.initialize();
-		while (restart) {
-			resetVariables();
-			window = new Window();
-			canvas = window.getCanvas();
-			window.run();
-		}
+		window = new Window();
+		window.run();
 	}
 	
-	private static void resetVariables() {
+	public static void restart() {
 		balls.clear();
 		paddles.clear();
 		bricks.clear();
 		ballsToRemove.clear();
 		bricksToRemove.clear();
-		if (window != null)
-			window.dispose();
-	}
-	
-	public static void setRestart() {
-		restart = true;
+		canvas = window.getCanvas();
 	}
 	
 	public static Window getWindow() {

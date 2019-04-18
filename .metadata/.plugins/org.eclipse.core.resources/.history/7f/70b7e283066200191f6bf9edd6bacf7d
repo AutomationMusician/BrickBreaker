@@ -18,21 +18,15 @@ public class Program {
 	public static void main(String[] args) throws InterruptedException {
 		InputController.initialize();
 		while (restart) {
-			resetVariables();
+			balls.clear();
+			paddles.clear();
+			bricks.clear();
+			ballsToRemove.clear();
+			bricksToRemove.clear();
 			window = new Window();
 			canvas = window.getCanvas();
 			window.run();
 		}
-	}
-	
-	private static void resetVariables() {
-		balls.clear();
-		paddles.clear();
-		bricks.clear();
-		ballsToRemove.clear();
-		bricksToRemove.clear();
-		if (window != null)
-			window.dispose();
 	}
 	
 	public static void setRestart() {

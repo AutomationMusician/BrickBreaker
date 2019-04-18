@@ -17,7 +17,6 @@ public class Window extends JFrame {
 	private boolean running;
 	
 	public Window() throws InterruptedException {
-		System.out.println("Restarting");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Brick Breaker");
 		setSize(1280, 700);
@@ -25,10 +24,6 @@ public class Window extends JFrame {
 		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		Thread.sleep(1000);
-		
-		Container container = getContentPane();
-		canvas = new Display(container.getWidth(), container.getHeight());
-		add(canvas);
 		
 		addKeyListener(new FrameKeyListener());
 		addWindowListener(new FrameWindowListener());
@@ -43,23 +38,40 @@ public class Window extends JFrame {
 	}
 	
 	public void run() {
-		canvas.setup();
-		running = true;
-	    while (running) {
-	    	canvas.draw();
-	    	if (!isWorking()) {
-	    		running = false;
-	    		Program.setRestart();
-	    		System.out.print("Preparing to restart\t");
-	    	}
-	    }
-	    
-	    remove(canvas);
-	    canvas.getGraphics().dispose();
-	    try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		boolean restart = true;
+		while (restart) {
+			System.out.println("restarting");
+			Container container = getContentPane();
+			canvas = new Display(container.getWidth(), container.getHeight());
+			add(canvas);
+			Program.restart();
+			
+			canvas.setup();
+			running = true;
+			restart = false;
+		    while (running) {
+		    	canvas.draw();
+		    	if (!isWorking()) {
+		    		restart = true;
+		    		running = false;
+		    		System.out.print("Preparing to restart\t");
+		    	}
+		    	/*
+		    	if (InputController.isHigh(InputController.getSelect())) {
+		    		restart = true;
+		    		running = false;
+		    		System.out.print("Preparing to restart\t");
+		    	}
+		    	*/
+		    }
+		    
+		    remove(canvas);
+		    canvas.getGraphics().dispose();
+		    try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -79,9 +91,7 @@ public class Window extends JFrame {
 		public void windowOpened(WindowEvent e) {}
 		public void windowClosing(WindowEvent e) {
 			running = false;
-			remove(canvas);
 			canvas.getGraphics().dispose();
-			dispose();
 		}
 		public void windowClosed(WindowEvent e) {}
 		public void windowIconified(WindowEvent e) {}

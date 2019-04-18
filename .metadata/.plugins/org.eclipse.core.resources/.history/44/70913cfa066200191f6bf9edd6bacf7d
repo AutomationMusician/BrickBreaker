@@ -54,7 +54,7 @@ public class Window extends JFrame {
 	    	}
 	    }
 	    
-	    remove(canvas);
+	    //remove(canvas);
 	    canvas.getGraphics().dispose();
 	    try {
 			Thread.sleep(1000);

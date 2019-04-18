@@ -31,8 +31,7 @@ public class Program {
 		bricks.clear();
 		ballsToRemove.clear();
 		bricksToRemove.clear();
-		if (window != null)
-			window.dispose();
+		window.dispose();
 	}
 	
 	public static void setRestart() {

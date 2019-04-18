@@ -17,7 +17,6 @@ public class Window extends JFrame {
 	private boolean running;
 	
 	public Window() throws InterruptedException {
-		System.out.println("Restarting");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Brick Breaker");
 		setSize(1280, 700);
@@ -79,7 +78,6 @@ public class Window extends JFrame {
 		public void windowOpened(WindowEvent e) {}
 		public void windowClosing(WindowEvent e) {
 			running = false;
-			remove(canvas);
 			canvas.getGraphics().dispose();
 			dispose();
 		}
