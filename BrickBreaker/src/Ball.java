@@ -13,12 +13,18 @@ public class Ball {
 	private Vector position;
 	private Vector velocity;
 	
-	public Ball(Vector paddlePosition) {	
+	public Ball(Vector startPosition, boolean paddle) {	
 		circle.height = circle.width = 2*radius;
 		rightBound = Program.getCanvas().getWidth() - radius;
 		lowerBound = Program.getCanvas().getHeight() - radius*(Paddle.radius - Paddle.height)/Paddle.radius;
-		position = new Vector(paddlePosition.x, paddlePosition.y - Paddle.radius);
-		double angle = (-3.0/4.0 + Math.random()/2.0)*Math.PI; // range of [-3*pi/4, -pi/4)
+		double angle;
+		if (paddle) {
+			angle = (-3.0/4.0 + Math.random()/2.0)*Math.PI; // range of [-3*pi/4, -pi/4)
+			position = new Vector(startPosition.x, startPosition.y - Paddle.radius);
+		} else {
+			angle = 2.0*Math.random()*Math.PI; // range of [0, 2*pi)
+			position = new Vector(startPosition.x, startPosition.y);
+		}
 		velocity = (new Vector(angle)).mult(Program.speed);
 	}
 	

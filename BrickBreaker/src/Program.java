@@ -12,6 +12,7 @@ public class Program {
 	public static ArrayList<Paddle> paddles = new ArrayList<Paddle>();
 	public static ArrayList<Brick> bricks = new ArrayList<Brick>();
 	public static Queue<Ball> ballsToRemove = new ArrayDeque<Ball>();
+	public static Queue<Ball> ballsToAdd = new ArrayDeque<Ball>();
 	public static Queue<Brick> bricksToRemove = new ArrayDeque<Brick>();
 	
 	public static void main(String[] args) throws InterruptedException {

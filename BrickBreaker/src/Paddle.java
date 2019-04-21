@@ -9,16 +9,17 @@ public class Paddle {
 	public static final double height = 15;
 	public static final double radius = (width*width + 4*height*height)/(8*height);
 	private final Joystick joystick;
-	private Color color = Color.BLACK;
+	private Color color;
 	private Ellipse2D.Double circle = new Ellipse2D.Double();
 	public Vector position;
 	
-	public Paddle(double positionCoefficient, Joystick joystick) {
+	public Paddle(double positionCoefficient, Color color, Joystick joystick) {
 		circle.width = circle.height = 2.0*radius;
 		position = new Vector();
 		position.x = Program.getCanvas().getWidth()*(1+positionCoefficient)*0.5;
 		position.y = Program.getCanvas().getHeight() + radius - height;
 		this.joystick = joystick;
+		this.color = color;
 	}
 	
 	public void updatePosition() {

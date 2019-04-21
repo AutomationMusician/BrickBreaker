@@ -29,6 +29,7 @@ public class Brick {
 	public Color color;
 	//private Color textColor;
 	private int contacts;
+	private boolean hasBall;
 	private Rectangle2D.Double rect2d = new Rectangle2D.Double();
 	
 	
@@ -44,6 +45,8 @@ public class Brick {
 			randomNum -= probabilities[contacts];
 		contacts++;
 		updateColor();
+		
+		hasBall = (Math.random() < 0.2);
 	}
 	
 	public void display(Graphics2D graphics) {
@@ -122,7 +125,11 @@ public class Brick {
 	public void contact() {
 		--contacts;
 		updateColor();
-		if (contacts <= 0) 
+		if (contacts <= 0) {
 			Program.bricksToRemove.add(this);
+			if (hasBall) {
+				Program.ballsToAdd.add(new Ball(position, false));
+			}
+		}
 	}
 }

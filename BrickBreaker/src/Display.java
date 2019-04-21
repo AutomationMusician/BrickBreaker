@@ -27,8 +27,10 @@ public class Display extends Canvas {
 	    bufferStrategy = getBufferStrategy();
 	    graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
 	    
-		Program.paddles.add(new Paddle(-0.5, InputController.getLeft()));
-		Program.paddles.add(new Paddle(0.5, InputController.getRight()));
+		Program.paddles.add(new Paddle(-0.5, new Color(0, 0, 0, 100),
+				InputController.getLeft()));
+		Program.paddles.add(new Paddle(0.5, new Color(0, 0, 0, 150),
+				InputController.getRight()));
 		createBricks();
 		createBalls();
 	}
@@ -36,7 +38,7 @@ public class Display extends Canvas {
 	public void draw() {
         for (int i=0; i<updatesPerFrame; i++) {
             updateObjects();
-            removeObjects();
+            addRemoveObjects();
         }
         display();
         bufferStrategy.show();
@@ -79,7 +81,12 @@ public class Display extends Canvas {
         	ball.display(graphics);
 	}
 	
-	private void removeObjects() {
+	private void addRemoveObjects() {
+		while (!Program.ballsToAdd.isEmpty()) {
+			Ball ball = Program.ballsToAdd.remove();
+			Program.balls.add(ball);
+		}
+		
 		while (!Program.ballsToRemove.isEmpty()) {
 			Ball ball = Program.ballsToRemove.remove();
 			Program.balls.remove(ball);
@@ -131,7 +138,7 @@ public class Display extends Canvas {
 	
 	public void createBalls() {
 		for (Paddle paddle : Program.paddles) 
-			Program.balls.add(new Ball(paddle.position));
+			Program.balls.add(new Ball(paddle.position, true));
 	}
 	
 	private void createBricks() {
